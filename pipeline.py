@@ -68,7 +68,16 @@ def validate_input(filepath):
     
 def main():
     """Main pipeline function."""
-    pass
+    args = parse_arguments()
+    setup_logging(args.verbose)
+    
+    logger.debug(
+        f"Arguments parsed: input = {args.input}, output = {args.output}",
+        f"format = {args.format}"
+    )
+    
+    if not validate_input(args.input):
+        sys.exit(1)
     
 if __name__ == "__main__":
     main()
