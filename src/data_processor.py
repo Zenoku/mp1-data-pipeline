@@ -38,7 +38,7 @@ def remove_outliers(df, columns, method, threshold):
         if col not in df.columns:
             logger.warning(f"Column does not exist: {col}")
             continue
-        if pd.api.types.is_numeric_dtype(df[col]):
+        if not pd.api.types.is_numeric_dtype(df[col]):
             logger.warning(f"Column is not numeric: {col}")
             continue
             
@@ -50,7 +50,7 @@ def remove_outliers(df, columns, method, threshold):
             iqr = q3 - q1
             lower = q1 - threshold * iqr
             upper = q3 + threshold * iqr
-            df = df[(df[col] >= lower & df[col] <= upper)]
+            df = df[(df[col] >= lower) & (df[col] <= upper)]
         
         elif method == "zscore":
             mean = df[col].mean()
