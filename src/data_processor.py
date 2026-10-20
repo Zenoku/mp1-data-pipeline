@@ -19,9 +19,9 @@ def handle_missing(df, axis="rows"):
         logger.debug(f"{before - len(df)} rows removed")
         return df
     elif axis == "columns":
-        before = len(df.shape[1])
+        before = df.shape[1]
         df = df.dropna(axis = 1)
-        logger.debug(f"{before - len(df)} rows removed")
+        logger.debug(f"{before - df.shape[1]} columns removed")
         return df
     else:
         logger.error(f"Unsupported axis: {axis}")
